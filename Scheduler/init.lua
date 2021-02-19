@@ -31,7 +31,7 @@ end
 
 function Scheduler:_update(currentTime)
 	local removed = 0
-	for i = 1, #Scheduler.Scheduled do
+	for i = 1, #self._scheduled do
 		local scheduled = self._scheduled[i - removed]
 		if scheduled:PastOrEqualResumeTime(currentTime) then
 			table.remove(Scheduler.Scheduled, i - removed)
