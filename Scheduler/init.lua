@@ -5,7 +5,7 @@ local clock = os.clock
 local Scheduler = {}
 
 -- // CLASSES //
-local ScheduledThread = require(script.ScheduledThread)
+local ScheduledThread
 
 -- // MAIN FUNCTIONS //
 function Scheduler:FastSchedule(t)
@@ -17,6 +17,15 @@ function Scheduler:Schedule(t, thread)
 	local scheduled = ScheduledThread.new(t, thread)
 	self._scheduled[#self._scheduled + 1] = scheduled
 	return scheduled
+end
+
+function Scheduler:Cancel(scheduledThread)
+    local index = table.find(self._scheduled, scheduledThread)
+    if index then
+        table.remove(self._scheduled, index)
+    else
+        warn(tostring(scheduledThread) .. " is not timed!")
+    end
 end
 
 
@@ -38,6 +47,7 @@ function Scheduler:Init()
 	self._scheduled = { }
 	self._timed = { }
 
+	ScheduledThread = require(script.ScheduledThread)
 	require(script.Timed)
 	require(script.TimedFunction).TimedFunction:Init()
 

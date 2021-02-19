@@ -1,6 +1,9 @@
 -- // RE-DEFINITIONS //
 local clock = os.clock
 
+-- // MODULES//
+local Scheduler = require(script.Parent)
+
 -- // CLASS //
 local ScheduledThread = {}
 local ScheduledThreadClass = {}
@@ -35,6 +38,10 @@ function ScheduledThreadClass:Resume(currentTime)
 
 	self.resumed = true
 	coroutine.resume(self.thread, currentTime - self.scheduledTime)
+end
+
+function ScheduledThreadClass:Cancel()
+	Scheduler:Cancel(self)
 end
 
 -- // META-METHODS //
