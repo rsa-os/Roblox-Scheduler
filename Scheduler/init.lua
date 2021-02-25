@@ -34,7 +34,7 @@ function Scheduler:_update(currentTime)
 	for i = 1, #self._scheduled do
 		local scheduled = self._scheduled[i - removed]
 		if scheduled:PastOrEqualResumeTime(currentTime) then
-			table.remove(Scheduler.Scheduled, i - removed)
+			table.remove(self._scheduled, i - removed)
 			removed = removed + 1
 			scheduled:Resume(currentTime)
 		end
@@ -47,7 +47,7 @@ function Scheduler:Init()
 	self._scheduled = { }
 	self._timed = { }
 
-	ScheduledThread = require(script.ScheduledThread)
+	ScheduledThread = require(script.ScheduledThread).ScheduledThread
 	require(script.Timed)
 	require(script.TimedFunction).TimedFunction:Init()
 
