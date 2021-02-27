@@ -2,7 +2,7 @@
 local clock = os.clock
 
 -- // MODULES//
-local Scheduler = require(script.Parent)
+local Scheduler = require(script.Parent).Scheduler
 
 -- // CLASS //
 local ScheduledThread = {}
