@@ -37,7 +37,11 @@ function ScheduledThreadClass:Resume(currentTime)
 	end
 
 	self.resumed = true
-	coroutine.resume(self.thread, currentTime - self.scheduledTime)
+	local success, err = coroutine.resume(self.thread, currentTime - self.scheduledTime)
+
+	if not success then
+		warn(tostring(self) .. ' failed to resume. Error: ' .. tostring(err))
+	end
 end
 
 function ScheduledThreadClass:Cancel()
@@ -48,7 +52,7 @@ end
 function ScheduledThreadClass:__tostring()
 	return
 		("ScheduledThread {ExpectedResumeTime: %.04f, RequestedWaitTime: %.04f,"
-		.. " ScheduledTime: %.04f"
+		.. " ScheduledTime: %.04f}"
 		):format(self.expectedResumeTime, self.requestedWaitTime, self.scheduledTime)
 end
 
