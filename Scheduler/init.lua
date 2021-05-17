@@ -24,7 +24,7 @@ function Scheduler:Cancel(scheduledThread)
     if index then
         table.remove(self._scheduled, index)
     else
-        warn(tostring(scheduledThread) .. " is not timed!")
+        warn(tostring(scheduledThread) .. " is not timed!\n" .. (debug.traceback(nil, 3) or ''))
     end
 end
 

@@ -14,7 +14,7 @@ function Scheduler:StopTimedFunction(timed)
     if index then
         table.remove(self._timed, index)
     else
-        warn(tostring(timed) .. " is not timed!")
+        warn(tostring(timed) .. " is not timed!\n" .. (debug.traceback(nil, 3) or ''))
     end
 end
 
