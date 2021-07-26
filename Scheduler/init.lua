@@ -54,7 +54,7 @@ end
 
 function Scheduler:FastSchedule(t)
 	t = t or (1 / 60)
-	return coroutine.yield(Scheduler:Schedule(t, coroutine.running()))
+	return coroutine.yield(self:Schedule(t, coroutine.running()))
 end
 
 function Scheduler:Schedule(t, thread)
